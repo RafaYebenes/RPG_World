@@ -44,14 +44,15 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
 
         expenseCtx.updateExpense(updatedExpense);
       }
+      navigation.goBack();
     } else {
       //TODO Show an error or smth
     }
   }
 
-  function deleteHandler(expenseId:number) {
+  function deleteHandler(expenseId: number) {
     if (expenseId) expenseCtx.deleteExpense(expenseId);
- 
+    navigation.goBack();
   }
 
   return (

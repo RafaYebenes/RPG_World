@@ -5,12 +5,12 @@ export default function Input({
   label,
   keyboardType,
   onChange,
-  value,
+  placeholder,
 }: {
   label: string;
   keyboardType: keyboardType;
   onChange: (value: string) => void;
-  value: string;
+  placeholder: string;
 }) {
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ export default function Input({
         style={styles.input}
         onChangeText={(value) => onChange(value)}
         keyboardType={keyboardType}
-        value={value}
+        placeholder={placeholder}
       ></TextInput>
     </View>
   );

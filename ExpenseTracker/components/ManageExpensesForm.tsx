@@ -23,6 +23,7 @@ export default function ManageExpensesForm({
   const initDate = expense ? expense.date : new Date();
   const [date, setDate] = useState<Date>(initDate);
   const [cost, setCost] = useState<number>();
+  const [submited, setSubmited] = useState<boolean>(false);
 
   const onChange = (
     event: DateTimePickerEvent,
@@ -46,20 +47,23 @@ export default function ManageExpensesForm({
           label="Name:"
           keyboardType="default"
           onChange={(value) => setName(value)}
-          value={expense ? expense.name : ""}
+          placeholder={expense ? expense.name : ""}
         ></Input>
+        {!name && submited && (
+          <Text style={styles.error}>You must enter a name.</Text>
+        )}
         <Input
           label="Cost:"
           keyboardType="number-pad"
           onChange={(value) => setCost(+value)}
-          value={expense ? "" + expense.cost : ""}
+          placeholder={expense ? "" + expense.cost : ""}
         ></Input>
+        {!cost && submited && (
+          <Text style={styles.error}>You must enter a cost.</Text>
+        )}
         <View>
           <Button onPress={showDatePicker} title={"Date"}></Button>
-          <Text>
-            Selected date:{" "}
-            {date.toLocaleString().split(',')[0]}
-          </Text>
+          <Text>Selected date: {date.toLocaleString().split(",")[0]}</Text>
         </View>
       </View>
       <View style={styles.containerButtons}>
@@ -69,7 +73,10 @@ export default function ManageExpensesForm({
         <View>
           <Button
             title={expense ? "Update" : "Add"}
-            onPress={() => onSubmit(name, date, cost)}
+            onPress={() => {
+              setSubmited(true);
+              if (name && date && cost) onSubmit(name, date, cost);
+            }}
           ></Button>
         </View>
       </View>
@@ -112,5 +119,8 @@ const styles = StyleSheet.create({
   },
   trashIcon: {
     margin: 10,
+  },
+  error: {
+    color: "red",
   },
 });
