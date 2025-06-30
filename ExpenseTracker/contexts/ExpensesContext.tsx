@@ -43,11 +43,10 @@ export default function ExpensesContextProvider({
   }
 
   function updateExpense(expense: IExpense) {
-    const expensesHelper = expenses;
-    expensesHelper.map((e) => {
-      if (e.id === expense.id) e = expense;
-    });
-    setExpenses(expensesHelper);
+    const newExpenses: IExpense[] = expenses.map((e) =>
+      e.id === expense.id ? expense : e
+    );
+    setExpenses(newExpenses);
   }
 
   const value: ExpensesContextType = {
