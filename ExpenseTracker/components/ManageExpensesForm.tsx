@@ -6,20 +6,22 @@ import {
   DateTimePickerAndroid,
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
+import { IExpense } from "../Interfaces/IExpense";
 
 export default function ManageExpensesForm({
-  expenseId,
+  expense,
   onCancel,
   onSubmit,
   onDelete,
 }: {
-  expenseId?: number;
+  expense?: IExpense;
   onCancel: () => void;
   onSubmit: (name?: string, date?: Date, cost?: number) => void;
   onDelete: (expenseId: number) => void;
 }) {
   const [name, setName] = useState<string>();
-  const [date, setDate] = useState<Date>(new Date());
+  const initDate = expense ? expense.date : new Date();
+  const [date, setDate] = useState<Date>(initDate);
   const [cost, setCost] = useState<number>();
 
   const onChange = (
@@ -44,15 +46,20 @@ export default function ManageExpensesForm({
           label="Name:"
           keyboardType="default"
           onChange={(value) => setName(value)}
+          value={expense ? expense.name : ""}
         ></Input>
         <Input
           label="Cost:"
           keyboardType="number-pad"
           onChange={(value) => setCost(+value)}
+          value={expense ? "" + expense.cost : ""}
         ></Input>
         <View>
           <Button onPress={showDatePicker} title={"Date"}></Button>
-          <Text>Selected date: {date.toDateString()}</Text>
+          <Text>
+            Selected date:{" "}
+            {date.toLocaleString().split(',')[0]}
+          </Text>
         </View>
       </View>
       <View style={styles.containerButtons}>
@@ -61,17 +68,17 @@ export default function ManageExpensesForm({
         </View>
         <View>
           <Button
-            title={expenseId ? "Update" : "Add"}
+            title={expense ? "Update" : "Add"}
             onPress={() => onSubmit(name, date, cost)}
           ></Button>
         </View>
       </View>
       <View style={styles.separator}></View>
-      {expenseId && (
+      {expense && (
         <View style={styles.trashIcon}>
           <Pressable
             onPress={() => {
-              onDelete;
+              onDelete(expense.id);
             }}
           >
             <Ionicons name="trash" size={24}></Ionicons>

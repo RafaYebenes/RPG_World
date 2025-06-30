@@ -22,6 +22,7 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
   const navigation = useNavigation<ManageExpensesNavigationProps>();
 
   const expenseId = route.params?.expenseId;
+  const expense = expenseCtx.expenses.find((e) => e.id == expenseId);
 
   function updateOrAddHandler(name?: string, date?: Date, cost?: number) {
     if (name && date && cost) {
@@ -40,7 +41,7 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
           date: date,
           cost: cost,
         };
-        
+
         expenseCtx.updateExpense(updatedExpense);
       }
     } else {
@@ -48,14 +49,15 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
     }
   }
 
-  function deleteHandler() {
+  function deleteHandler(expenseId:number) {
     if (expenseId) expenseCtx.deleteExpense(expenseId);
+ 
   }
 
   return (
     <View style={styles.container}>
       <ManageExpensesForm
-        expenseId={expenseId}
+        expense={expense}
         onCancel={navigation.goBack}
         onDelete={deleteHandler}
         onSubmit={updateOrAddHandler}

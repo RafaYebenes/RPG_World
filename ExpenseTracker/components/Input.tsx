@@ -5,10 +5,12 @@ export default function Input({
   label,
   keyboardType,
   onChange,
+  value,
 }: {
   label: string;
   keyboardType: keyboardType;
   onChange: (value: string) => void;
+  value: string;
 }) {
   return (
     <View style={styles.container}>
@@ -17,6 +19,7 @@ export default function Input({
         style={styles.input}
         onChangeText={(value) => onChange(value)}
         keyboardType={keyboardType}
+        value={value}
       ></TextInput>
     </View>
   );
