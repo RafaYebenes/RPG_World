@@ -1,11 +1,12 @@
 import { createContext, ReactElement, useState } from "react";
 import { IExpense } from "../Interfaces/IExpense";
-import EXPENSES from "../data/expenses.json";
+import { dropExpense, patchExpense, uploadExpense } from "../db/controller";
+import { getExpenses } from "../db/service";
 
 type ExpensesContextType = {
   expenses: Array<IExpense>;
   addExpense: (exp: IExpense) => void;
-  deleteExpense: (id: number) => void;
+  deleteExpense: (id: string) => void;
   updateExpense: (exp: IExpense) => void;
 };
 
@@ -21,32 +22,23 @@ export default function ExpensesContextProvider({
 }: {
   children: ReactElement;
 }) {
-  const expensesRaw: IExpense[] = [];
+  const expensesInit: IExpense[] = [];
+  const [expenses, setExpenses] = useState<IExpense[]>(expensesInit);
+  getExpenses(setExpenses);
 
-  EXPENSES.forEach((e) => {
-    expensesRaw.push({
-      id: e.id,
-      name: e.name,
-      date: new Date(e.date),
-      cost: e.cost,
-    });
-  });
-
-  const [expenses, setExpenses] = useState<IExpense[]>(expensesRaw);
-
-  function addExpense(expense: IExpense) {
-    setExpenses([...expenses, expense]);
+  async function addExpense(expense: IExpense) {
+    uploadExpense(expense.name, expense.cost, expense.date);
+    await getExpenses(setExpenses);
   }
 
-  function deleteExpense(idExpense: number) {
-    setExpenses(expenses.filter((e) => e.id != idExpense));
+  async function deleteExpense(idExpense: string) {
+    dropExpense(idExpense);
+    await getExpenses(setExpenses);
   }
 
-  function updateExpense(expense: IExpense) {
-    const newExpenses: IExpense[] = expenses.map((e) =>
-      e.id === expense.id ? expense : e
-    );
-    setExpenses(newExpenses);
+  async function updateExpense(expense: IExpense) {
+    patchExpense(expense);
+    await getExpenses(setExpenses);
   }
 
   const value: ExpensesContextType = {

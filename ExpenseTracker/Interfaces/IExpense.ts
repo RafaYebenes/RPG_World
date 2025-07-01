@@ -1,5 +1,5 @@
 export type IExpense = {
-  id: number;
+  id: string;
   name: string;
   date: Date;
   cost: number;

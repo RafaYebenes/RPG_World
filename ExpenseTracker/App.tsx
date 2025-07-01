@@ -11,7 +11,7 @@ import AddButton from "./components/AddButton";
 
 export type StackParamList = {
   ExpensesOverview: undefined;
-  ManageExpenses: { expenseId: number } | undefined;
+  ManageExpenses: { expenseId: string } | undefined;
 };
 const Stack = createNativeStackNavigator<StackParamList>();
 
