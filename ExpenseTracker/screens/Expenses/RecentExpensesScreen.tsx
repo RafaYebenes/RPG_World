@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
-import { ExpensesContext } from "../contexts/ExpensesContext";
-import Expense from "../components/Expense";
-import Summary from "../components/Summary";
+import { ExpensesContext } from "../../contexts/ExpensesContext";
+import Expense from "../../components/Expenses/Expense";
+import Summary from "../../components/Expenses/Summary";
 
-export default function RecentExpenses() {
+export default function RecentExpensesScreen() {
   const expensesCtx = useContext(ExpensesContext);
   const currentDate = new Date();
   const tresholdDate = new Date(currentDate);

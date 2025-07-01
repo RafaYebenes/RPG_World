@@ -1,10 +1,10 @@
 import { FlatList, Text, View, StyleSheet } from "react-native";
 import { useContext } from "react";
-import { ExpensesContext } from "../contexts/ExpensesContext";
-import Expense from "../components/Expense";
-import Summary from "../components/Summary";
+import { ExpensesContext } from "../../contexts/ExpensesContext";
+import Expense from "../../components/Expenses/Expense";
+import Summary from "../../components/Expenses/Summary";
 
-export default function AllExpenses() {
+export default function AllExpensesScreen() {
   const expensesCtx = useContext(ExpensesContext);
 
   const totalCosts = expensesCtx.expenses.reduce((a, c) => a + c.cost, 0);

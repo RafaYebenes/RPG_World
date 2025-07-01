@@ -1,7 +1,7 @@
 import { Pressable, View } from "react-native";
 import Ionicons from "@react-native-vector-icons/ionicons";
 import { useNavigation } from "@react-navigation/native";
-import { StackParamList } from "../App";
+import { StackParamList } from "../../Navigators/Expenses/ExpensesNavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type AddButtonNavigationProps = NativeStackNavigationProp<StackParamList>;

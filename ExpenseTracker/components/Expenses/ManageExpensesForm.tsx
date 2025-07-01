@@ -6,7 +6,7 @@ import {
   DateTimePickerAndroid,
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { IExpense } from "../Interfaces/IExpense";
+import { IExpense } from "../../Interfaces/IExpense";
 
 export default function ManageExpensesForm({
   expense,

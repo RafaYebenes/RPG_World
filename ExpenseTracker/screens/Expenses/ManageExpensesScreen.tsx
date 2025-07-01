@@ -3,12 +3,12 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { Button, Pressable, StyleSheet, View } from "react-native";
-import { StackParamList } from "../App";
+import { StackParamList } from "../../Navigators/Expenses/ExpensesNavigator";
 
 import { useNavigation } from "@react-navigation/native";
 import { useContext } from "react";
-import { ExpensesContext } from "../contexts/ExpensesContext";
-import ManageExpensesForm from "../components/ManageExpensesForm";
+import { ExpensesContext } from "../../contexts/ExpensesContext";
+import ManageExpensesForm from "../../components/Expenses/ManageExpensesForm";
 
 type ManageExpensesProps = NativeStackScreenProps<
   StackParamList,
@@ -16,7 +16,7 @@ type ManageExpensesProps = NativeStackScreenProps<
 >;
 type ManageExpensesNavigationProps = NativeStackNavigationProp<StackParamList>;
 
-export default function ManageExpenses({ route }: ManageExpensesProps) {
+export default function ManageExpensesScreen({ route }: ManageExpensesProps) {
   const expenseCtx = useContext(ExpensesContext);
 
   const navigation = useNavigation<ManageExpensesNavigationProps>();
@@ -28,7 +28,7 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
     if (name && date && cost) {
       if (!expenseId) {
         const newExpense = {
-          id: 'id',
+          id: "id",
           name: name,
           date: date,
           cost: cost,
