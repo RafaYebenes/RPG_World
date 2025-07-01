@@ -28,7 +28,7 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
     if (name && date && cost) {
       if (!expenseId) {
         const newExpense = {
-          id: Math.floor(Math.random() * 1000 + 6),
+          id: 'id',
           name: name,
           date: date,
           cost: cost,
@@ -50,7 +50,7 @@ export default function ManageExpenses({ route }: ManageExpensesProps) {
     }
   }
 
-  function deleteHandler(expenseId: number) {
+  function deleteHandler(expenseId: string) {
     if (expenseId) expenseCtx.deleteExpense(expenseId);
     navigation.goBack();
   }

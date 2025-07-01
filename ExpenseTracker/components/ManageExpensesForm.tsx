@@ -17,7 +17,7 @@ export default function ManageExpensesForm({
   expense?: IExpense;
   onCancel: () => void;
   onSubmit: (name?: string, date?: Date, cost?: number) => void;
-  onDelete: (expenseId: number) => void;
+  onDelete: (expenseId: string) => void;
 }) {
   const [name, setName] = useState<string>();
   const initDate = expense ? expense.date : new Date();
