@@ -1,6 +1,6 @@
 import { createContext, ReactElement, useState } from "react";
 import { IExpense } from "../Interfaces/IExpense";
-import { dropExpense, patchExpense, uploadExpense } from "../db/controller";
+import { dropExpense, patchExpense, uploadExpense } from "../db/Controllers/ExpensesController";
 import { getExpenses } from "../db/service";
 
 type ExpensesContextType = {

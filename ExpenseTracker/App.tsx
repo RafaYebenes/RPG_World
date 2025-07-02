@@ -1,14 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import ExpensesContextProvider from "./contexts/ExpensesContext";
-import ExpensesNavigator from "./Navigators/Expenses/ExpensesNavigator";
+import MainNavigator from "./Navigators/MainNavigator";
+import AuthContextProvider from "./contexts/AuthContext";
 
 export default function App() {
+ 
   return (
     <>
       <StatusBar style="auto" />
-      <ExpensesContextProvider>
-        <ExpensesNavigator></ExpensesNavigator>
-      </ExpensesContextProvider>
+      <AuthContextProvider>
+        <MainNavigator></MainNavigator>
+      </AuthContextProvider>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { IExpense } from "../Interfaces/IExpense";
-import { fetchExpenses } from "./controller";
+import { fetchExpenses } from "./Controllers/ExpensesController";
 
 export async function getExpenses(
   setter: (value: React.SetStateAction<IExpense[]>) => void

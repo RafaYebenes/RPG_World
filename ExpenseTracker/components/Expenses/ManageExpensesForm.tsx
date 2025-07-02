@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Text, View, StyleSheet, Button, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Input from "./Input";
+import Input from "../Input";
 import {
   DateTimePickerAndroid,
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { IExpense } from "../../Interfaces/IExpense";
+import { FormStyles } from "../../styles/FormStyles";
 
 export default function ManageExpensesForm({
   expense,
@@ -41,8 +42,8 @@ export default function ManageExpensesForm({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerInputs}>
+    <View style={FormStyles.container}>
+      <View style={FormStyles.containerInputs}>
         <Input
           label="Name:"
           keyboardType="default"
@@ -50,7 +51,7 @@ export default function ManageExpensesForm({
           placeholder={expense ? expense.name : ""}
         ></Input>
         {!name && submited && (
-          <Text style={styles.error}>You must enter a name.</Text>
+          <Text style={FormStyles.error}>You must enter a name.</Text>
         )}
         <Input
           label="Cost:"
@@ -59,14 +60,14 @@ export default function ManageExpensesForm({
           placeholder={expense ? "" + expense.cost : ""}
         ></Input>
         {!cost && submited && (
-          <Text style={styles.error}>You must enter a cost.</Text>
+          <Text style={FormStyles.error}>You must enter a cost.</Text>
         )}
         <View>
           <Button onPress={showDatePicker} title={"Date"}></Button>
           <Text>Selected date: {date.toLocaleString().split(",")[0]}</Text>
         </View>
       </View>
-      <View style={styles.containerButtons}>
+      <View style={FormStyles.containerButtons}>
         <View>
           <Button title="Cancel" onPress={onCancel}></Button>
         </View>
@@ -80,9 +81,9 @@ export default function ManageExpensesForm({
           ></Button>
         </View>
       </View>
-      <View style={styles.separator}></View>
+      <View style={FormStyles.separator}></View>
       {expense && (
-        <View style={styles.trashIcon}>
+        <View style={FormStyles.trashIcon}>
           <Pressable
             onPress={() => {
               onDelete(expense.id);
@@ -96,31 +97,4 @@ export default function ManageExpensesForm({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignContent: "center",
-    alignItems: "center",
-    padding: 20,
-    width: "100%",
-  },
-  containerInputs: {
-    width: "100%",
-  },
-  containerButtons: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    margin: 20,
-    width: "80%",
-  },
-  separator: {
-    borderWidth: 0.5,
-    borderColor: "black",
-    width: "80%",
-  },
-  trashIcon: {
-    margin: 10,
-  },
-  error: {
-    color: "red",
-  },
-});
+

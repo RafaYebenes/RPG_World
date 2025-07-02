@@ -1,16 +1,18 @@
 import { TextInput, StyleSheet, View, Text } from "react-native";
 
-type keyboardType = "default" | "number-pad";
+type keyboardType = "default" | "number-pad" | "email-address";
 export default function Input({
   label,
   keyboardType,
   onChange,
   placeholder,
+  password,
 }: {
   label: string;
   keyboardType: keyboardType;
   onChange: (value: string) => void;
   placeholder: string;
+  password: boolean;
 }) {
   return (
     <View style={styles.container}>
@@ -20,6 +22,7 @@ export default function Input({
         onChangeText={(value) => onChange(value)}
         keyboardType={keyboardType}
         placeholder={placeholder}
+        secureTextEntry={password}
       ></TextInput>
     </View>
   );

@@ -7,8 +7,8 @@ import {
   doc,
   setDoc,
 } from "firebase/firestore";
-import { db } from "../db/connection";
-import { IExpense } from "../Interfaces/IExpense";
+import { db } from "../connection";
+import { IExpense } from "../../Interfaces/IExpense";
 
 export async function uploadExpense(name: string, cost: number, date: Date) {
   try {

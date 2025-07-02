@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { IExpense } from "../../Interfaces/IExpense";
 import { useNavigation } from "@react-navigation/native";
-import { StackParamList } from "../../App";
+import { StackParamList } from "../../Navigators/Expenses/ExpensesNavigator";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type ExpenseNavigationProps = NativeStackNavigationProp<
