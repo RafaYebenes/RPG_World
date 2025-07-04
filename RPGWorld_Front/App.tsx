@@ -1,12 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-
-import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import MainNavigator from './Navigators/MainNavigator';
+import AuthContextProvider from './Context/AuthContext';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -14,9 +8,9 @@ function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View>
-        <Text>Hellow</Text>
-      </View>
+      <AuthContextProvider>
+        <MainNavigator />
+      </AuthContextProvider>
     </View>
   );
 }
