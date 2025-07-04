@@ -1,9 +1,8 @@
 import { createContext, ReactElement, useState } from 'react';
 import {
-  loginController,
-  signupController,
-} from '../Controllers/AuthController';
-/* import { createUser, logIn } from "../db/Controllers/AuthController"; */
+  signInWithEmail,
+  signUpWithEmail,
+} from '../Supabase/Controllers/AuthController';
 
 type AuthContextType = {
   token: string | null;
@@ -28,16 +27,16 @@ export default function AuthContextProvider({
 }) {
   const [token, setToken] = useState<string | null>(null);
 
-  function signUp(email: string, password: string) {
-    const user = signupController(email, password);
-    if (user) setToken(user.token);
+  async function signUp(email: string, password: string) {
+    const newToken = await signUpWithEmail(email, password);
+  if (newToken) setToken(newToken);
+   
   }
 
-  function signIn(email: string, password: string) {
-    const user = loginController(email, password);
-    console.log(email);
+  async function signIn(email: string, password: string) {
+    const newToken = await signInWithEmail(email, password);
+    if (newToken) setToken(newToken);
 
-    if (user) setToken(user.token);
   }
 
   function signOut() {
